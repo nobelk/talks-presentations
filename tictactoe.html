@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic-Tac-Toe!</title>
+<style>
+  /* ===== BASIC PAGE SETUP ===== */
+  /* This makes the page look nice with a fun purple background */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  /* ===== GAME TITLE ===== */
+  /* The big fun title at the top */
+  h1 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    letter-spacing: 3px;
+  }
+
+  /* ===== STATUS MESSAGE ===== */
+  /* Shows whose turn it is, or who won */
+  .status {
+    font-size: 1.5em;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 30px;
+    border-radius: 50px;
+    min-width: 280px;
+    text-align: center;
+  }
+
+  /* ===== THE GAME BOARD ===== */
+  /* A 3x3 grid made with CSS Grid - this is where the magic happens! */
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ===== EACH SQUARE ON THE BOARD ===== */
+  /* These are the 9 clickable squares */
+  .cell {
+    width: 110px;
+    height: 110px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 16px;
+    font-size: 3em;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* When you hover over an empty square, it lights up */
+  .cell:hover {
+    background: #fff;
+    transform: scale(1.05);
+  }
+
+  /* ===== X AND O COLORS ===== */
+  /* X is blue, O is pink - so they're easy to tell apart! */
+  .cell.x {
+    color: #4a6cf7;
+    text-shadow: 2px 2px 4px rgba(74, 108, 247, 0.3);
+  }
+
+  .cell.o {
+    color: #f74a8a;
+    text-shadow: 2px 2px 4px rgba(247, 74, 138, 0.3);
+  }
+
+  /* ===== WINNING SQUARES ===== */
+  /* When someone wins, their 3 squares glow gold! */
+  .cell.winner {
+    background: #ffd700;
+    animation: celebrate 0.6s ease infinite alternate;
+  }
+
+  /* A fun bounce animation for the winning squares */
+  @keyframes celebrate {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+  }
+
+  /* ===== PLAY AGAIN BUTTON ===== */
+  /* A big friendly button to restart the game */
+  .play-again {
+    margin-top: 25px;
+    padding: 14px 40px;
+    font-size: 1.3em;
+    font-weight: 700;
+    background: #38ef7d;
+    color: #1a3a0a;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+  }
+
+  .play-again:hover {
+    background: #2ecc71;
+    transform: scale(1.08);
+  }
+
+  /* Hide the button until the game ends */
+  .play-again.hidden {
+    display: none;
+  }
+
+  /* ===== SCOREBOARD ===== */
+  /* Keeps track of how many games each player has won */
+  .scoreboard {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+
+  .score {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 24px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 700;
+  }
+
+  .score-x { border: 2px solid #4a6cf7; }
+  .score-o { border: 2px solid #f74a8a; }
+
+  /* ===== MAKE IT WORK ON TABLETS ===== */
+  /* Smaller screens get smaller squares */
+  @media (max-width: 500px) {
+    h1 { font-size: 2.2em; }
+    .cell { width: 90px; height: 90px; font-size: 2.5em; }
+    .status { font-size: 1.2em; }
+  }
+</style>
+</head>
+<body>
+
+<!-- The game title -->
+<h1>Tic-Tac-Toe!</h1>
+
+<!-- Scoreboard to track wins -->
+<div class="scoreboard">
+  <div class="score score-x">X Wins: <span id="scoreX">0</span></div>
+  <div class="score score-o">O Wins: <span id="scoreO">0</span></div>
+</div>
+
+<!-- Status message - shows whose turn or who won -->
+<div class="status" id="status">Player X's Turn</div>
+
+<!-- The 3x3 game board - each button is one square -->
+<div class="board" id="board">
+  <button class="cell" data-index="0"></button>
+  <button class="cell" data-index="1"></button>
+  <button class="cell" data-index="2"></button>
+  <button class="cell" data-index="3"></button>
+  <button class="cell" data-index="4"></button>
+  <button class="cell" data-index="5"></button>
+  <button class="cell" data-index="6"></button>
+  <button class="cell" data-index="7"></button>
+  <button class="cell" data-index="8"></button>
+</div>
+
+<!-- Play Again button - hidden until the game ends -->
+<button class="play-again hidden" id="playAgain">Play Again</button>
+
+<script>
+  // ===== GAME VARIABLES =====
+  // These keep track of what's happening in the game
+
+  let currentPlayer = 'X';           // Who's playing right now (X goes first!)
+  let board = ['', '', '', '', '', '', '', '', ''];  // The 9 squares (empty at start)
+  let gameActive = true;             // Is the game still going?
+  let scores = { X: 0, O: 0 };      // Win counter for each player
+
+  // ===== WINNING COMBINATIONS =====
+  // All the ways you can win - 3 in a row, column, or diagonal
+  // Each array has 3 numbers = the positions of 3 squares that make a line
+  const winPatterns = [
+    [0, 1, 2],  // top row
+    [3, 4, 5],  // middle row
+    [6, 7, 8],  // bottom row
+    [0, 3, 6],  // left column
+    [1, 4, 7],  // middle column
+    [2, 5, 8],  // right column
+    [0, 4, 8],  // diagonal top-left to bottom-right
+    [2, 4, 6],  // diagonal top-right to bottom-left
+  ];
+
+  // ===== GET PAGE ELEMENTS =====
+  // Grab the parts of the page we need to change
+  const cells = document.querySelectorAll('.cell');
+  const statusText = document.getElementById('status');
+  const playAgainBtn = document.getElementById('playAgain');
+
+  // ===== HANDLE A CLICK ON A SQUARE =====
+  // This runs every time someone clicks a square
+  function handleClick(e) {
+    const index = e.target.dataset.index;  // Which square was clicked? (0-8)
+
+    // If the square is already taken or game is over, do nothing
+    if (board[index] !== '' || !gameActive) return;
+
+    // Place the current player's mark (X or O) in that square
+    board[index] = currentPlayer;
+    e.target.textContent = currentPlayer;
+    e.target.classList.add(currentPlayer.toLowerCase());
+
+    // Check if this move wins the game or makes a draw
+    if (checkWin()) {
+      // Someone won!
+      statusText.textContent = `Player ${currentPlayer} Wins!`;
+      gameActive = false;
+      scores[currentPlayer]++;
+      updateScoreboard();
+      playAgainBtn.classList.remove('hidden');
+    } else if (board.every(cell => cell !== '')) {
+      // All squares are filled but nobody won = it's a draw!
+      statusText.textContent = "It's a Draw!";
+      gameActive = false;
+      playAgainBtn.classList.remove('hidden');
+    } else {
+      // Game continues - switch to the other player
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      statusText.textContent = `Player ${currentPlayer}'s Turn`;
+    }
+  }
+
+  // ===== CHECK FOR A WINNER =====
+  // Look at all winning patterns to see if anyone got 3 in a row
+  function checkWin() {
+    for (const pattern of winPatterns) {
+      const [a, b, c] = pattern;  // Get the 3 positions to check
+
+      // If all 3 squares have the same mark (and aren't empty), we have a winner!
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        // Highlight the winning squares in gold
+        cells[a].classList.add('winner');
+        cells[b].classList.add('winner');
+        cells[c].classList.add('winner');
+        return true;  // Yes, someone won!
+      }
+    }
+    return false;  // No winner yet
+  }
+
+  // ===== UPDATE THE SCOREBOARD =====
+  // Show the latest win counts
+  function updateScoreboard() {
+    document.getElementById('scoreX').textContent = scores.X;
+    document.getElementById('scoreO').textContent = scores.O;
+  }
+
+  // ===== RESET THE GAME =====
+  // Clear everything and start fresh
+  function resetGame() {
+    board = ['', '', '', '', '', '', '', '', ''];  // Empty all squares
+    currentPlayer = 'X';                            // X always goes first
+    gameActive = true;                              // Game is on!
+    statusText.textContent = "Player X's Turn";
+
+    // Clear each square on the screen
+    cells.forEach(cell => {
+      cell.textContent = '';
+      cell.classList.remove('x', 'o', 'winner');
+    });
+
+    playAgainBtn.classList.add('hidden');  // Hide the Play Again button
+  }
+
+  // ===== SET UP EVENT LISTENERS =====
+  // Tell each square to call handleClick when clicked
+  cells.forEach(cell => cell.addEventListener('click', handleClick));
+
+  // Tell the Play Again button to reset the game when clicked
+  playAgainBtn.addEventListener('click', resetGame);
+</script>
+
+</body>
+</html>

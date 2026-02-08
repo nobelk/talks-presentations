@@ -486,6 +486,115 @@
     line-height: 1.5;
   }
 
+  /* Slide illustrations */
+  .slide-figure {
+    max-width: 100%;
+    margin: 15px 0;
+  }
+
+  .slide-figure img {
+    max-height: 180px;
+    width: auto;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  }
+
+  .slide-figure svg {
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+  }
+
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 900px;
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .flow-item {
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 18px 22px;
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.25);
+    flex: 1;
+    max-width: 220px;
+  }
+
+  .flow-item .flow-icon {
+    font-size: 2.8em;
+    margin-bottom: 6px;
+  }
+
+  .flow-item p {
+    font-size: 0.95em;
+    line-height: 1.3;
+  }
+
+  .flow-arrow {
+    font-size: 2.2em;
+    opacity: 0.8;
+    flex-shrink: 0;
+  }
+
+  .figure-row {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 950px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .figure-row .figure-side {
+    flex-shrink: 0;
+  }
+
+  .figure-row .figure-side img {
+    max-height: 260px;
+    width: auto;
+  }
+
+  .figure-row .content-side {
+    flex: 1;
+  }
+
+  /* Device icons row */
+  .device-icons {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
+
+  .device-icon {
+    background: rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 14px 18px;
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.25);
+    min-width: 100px;
+    transition: transform 0.2s;
+  }
+
+  .device-icon:hover {
+    transform: scale(1.08);
+  }
+
+  .device-icon .icon {
+    font-size: 2.4em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .device-icon .label {
+    font-size: 0.8em;
+    font-weight: 700;
+    opacity: 0.9;
+  }
+
   @media (max-width: 900px) {
     .slide { padding: 30px 30px; }
     h1 { font-size: 2.2em; }
@@ -496,6 +605,13 @@
     .do-dont { grid-template-columns: 1fr; }
     .steps { flex-direction: column; }
     .prompt-compare { grid-template-columns: 1fr; }
+    .flow-diagram { flex-wrap: wrap; gap: 6px; }
+    .flow-item { max-width: 160px; padding: 12px; }
+    .flow-arrow { font-size: 1.5em; }
+    .figure-row { flex-direction: column; gap: 15px; }
+    .figure-row .figure-side img { max-height: 150px; }
+    .device-icons { gap: 12px; }
+    .device-icon { min-width: 80px; padding: 10px 12px; }
   }
 </style>
 </head>
@@ -506,7 +622,10 @@
 
 <!-- SLIDE 1: Title -->
 <div class="slide theme-title active" id="slide-1">
-  <div class="emoji-row">🤖 🧠 ✨</div>
+  <div class="slide-figure">
+    <img src="https://cdn.undraw.co/illustration/artificial-intelligence_43qa.svg" alt="AI illustration" style="max-height: 200px;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <div class="emoji-row" style="display:none;">🤖 🧠 ✨</div>
+  </div>
   <h1>AI &amp; Large Language Models</h1>
   <p class="subtitle">A Guide for Young Explorers</p>
   <p style="margin-top: 30px; font-size: 1.1em; opacity: 0.8;">Grades 3 &ndash; 8 &nbsp;|&nbsp; ~20 Minutes</p>
@@ -515,24 +634,63 @@
 
 <!-- SLIDE 2: What is AI? -->
 <div class="slide theme-blue" id="slide-2">
-  <div class="emoji-big">🤖</div>
-  <h2>What is Artificial Intelligence?</h2>
+  <h2>What is Artificial Intelligence? 🤖</h2>
   <div class="analogy-box">
     <p><strong>AI</strong> is when computers are programmed to do things that normally need human thinking — like recognizing pictures, understanding language, or making decisions.</p>
   </div>
   <p style="margin-top: 20px; font-size: 1.2em;">You already use AI every day!</p>
-  <div class="emoji-row" style="font-size: 2em; letter-spacing: 15px; margin-top: 10px;">📱 🎮 🎵 📸 🔍</div>
+  <div class="device-icons">
+    <div class="device-icon">
+      <span class="icon">📱</span>
+      <span class="label">Face Unlock</span>
+    </div>
+    <div class="device-icon">
+      <span class="icon">🎮</span>
+      <span class="label">Smart NPCs</span>
+    </div>
+    <div class="device-icon">
+      <span class="icon">🎵</span>
+      <span class="label">Song Picks</span>
+    </div>
+    <div class="device-icon">
+      <span class="icon">📸</span>
+      <span class="label">Photo Filters</span>
+    </div>
+    <div class="device-icon">
+      <span class="icon">🔍</span>
+      <span class="label">Web Search</span>
+    </div>
+    <div class="device-icon">
+      <span class="icon">🗣️</span>
+      <span class="label">Voice Assistants</span>
+    </div>
+  </div>
   <div class="notes">Ask: "Who has used Siri, Alexa, or Google Assistant?" Those are all AI! AI helps your phone recognize your face, suggests videos on YouTube, and helps filter spam from email.</div>
 </div>
 
 <!-- SLIDE 3: What is an LLM? -->
 <div class="slide theme-purple" id="slide-3">
   <h2>What is an LLM? 📚</h2>
-  <div class="analogy-box">
+  <div class="analogy-box" style="padding: 25px 40px;">
     <p>An <strong>LLM</strong> (Large Language Model) is a special kind of AI that has read <em>billions</em> of books, articles, and websites to learn how language works.</p>
-    <p style="margin-top: 15px;">It's like a super-powered <strong>word predictor</strong> — it figures out the best next word to write, one word at a time!</p>
   </div>
-  <div style="margin-top: 20px;">
+  <div class="flow-diagram">
+    <div class="flow-item">
+      <div class="flow-icon">📚</div>
+      <p><strong>Reads</strong><br>billions of books &amp; websites</p>
+    </div>
+    <div class="flow-arrow">➡️</div>
+    <div class="flow-item">
+      <div class="flow-icon">🧠</div>
+      <p><strong>Learns</strong><br>how language &amp; ideas connect</p>
+    </div>
+    <div class="flow-arrow">➡️</div>
+    <div class="flow-item">
+      <div class="flow-icon">💬</div>
+      <p><strong>Predicts</strong><br>the best next word to write</p>
+    </div>
+  </div>
+  <div style="margin-top: 10px;">
     <p style="font-size: 1.15em;">Think of it like <strong>autocomplete on your phone</strong>...but WAY more powerful! 💪</p>
   </div>
   <div class="notes">Analogy: "Imagine you read every book in every library in the world. Then someone asks you a question, and you put together an answer word-by-word, picking the best next word each time. That's basically what an LLM does — but with math instead of a brain!"</div>
@@ -541,26 +699,59 @@
 <!-- SLIDE 4: How Does It Work? -->
 <div class="slide theme-dark" id="slide-4">
   <h2>How Does an LLM Work? ⚙️</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-number">1</div>
-      <h3>📖 Training</h3>
-      <p>The AI reads billions of pages of text from books, websites, and articles</p>
-    </div>
-    <div class="step">
-      <div class="step-number">2</div>
-      <h3>🧩 Patterns</h3>
-      <p>It learns patterns — how words, sentences, and ideas connect to each other</p>
-    </div>
-    <div class="step">
-      <div class="step-number">3</div>
-      <h3>💬 Predicting</h3>
-      <p>When you ask a question, it predicts the best answer one word at a time</p>
-    </div>
-  </div>
-  <div class="analogy-box" style="margin-top: 25px; max-width: 800px;">
-    <p style="font-size: 1.15em;">⚠️ <strong>Key idea:</strong> An LLM doesn't <em>think</em> or <em>know</em> things like a human. It's really good at <strong>predicting</strong> what words should come next based on patterns!</p>
-  </div>
+  <!-- Visual flow: input → processing → output -->
+  <svg viewBox="0 0 900 280" style="max-width: 900px; width: 100%; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg">
+    <!-- Step 1: Training -->
+    <rect x="10" y="20" width="250" height="200" rx="20" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+    <text x="135" y="62" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Fredoka One, sans-serif" font-size="32" font-weight="bold">1</text>
+    <text x="135" y="105" text-anchor="middle" font-size="36">📖</text>
+    <text x="135" y="145" text-anchor="middle" fill="white" font-family="Fredoka One, sans-serif" font-size="20">Training</text>
+    <text x="135" y="172" text-anchor="middle" fill="white" font-family="Nunito, sans-serif" font-size="13" font-weight="600">AI reads billions of pages</text>
+    <text x="135" y="192" text-anchor="middle" fill="white" font-family="Nunito, sans-serif" font-size="13" font-weight="600">of books &amp; websites</text>
+    <!-- Books visual -->
+    <rect x="55" y="200" width="40" height="8" rx="2" fill="#FFD700" opacity="0.6"/>
+    <rect x="105" y="200" width="40" height="8" rx="2" fill="#FF6B6B" opacity="0.6"/>
+    <rect x="155" y="200" width="40" height="8" rx="2" fill="#4ECDC4" opacity="0.6"/>
+
+    <!-- Arrow 1→2 -->
+    <polygon points="280,120 310,105 310,135" fill="rgba(255,255,255,0.7)"/>
+    <line x1="265" y1="120" x2="308" y2="120" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+
+    <!-- Step 2: Patterns -->
+    <rect x="325" y="20" width="250" height="200" rx="20" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+    <text x="450" y="62" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Fredoka One, sans-serif" font-size="32" font-weight="bold">2</text>
+    <text x="450" y="105" text-anchor="middle" font-size="36">🧩</text>
+    <text x="450" y="145" text-anchor="middle" fill="white" font-family="Fredoka One, sans-serif" font-size="20">Patterns</text>
+    <text x="450" y="172" text-anchor="middle" fill="white" font-family="Nunito, sans-serif" font-size="13" font-weight="600">It learns how words and</text>
+    <text x="450" y="192" text-anchor="middle" fill="white" font-family="Nunito, sans-serif" font-size="13" font-weight="600">ideas connect together</text>
+    <!-- Neural network dots -->
+    <circle cx="410" cy="206" r="4" fill="#6dd5ed" opacity="0.6"/><circle cx="430" cy="200" r="4" fill="#f093fb" opacity="0.6"/>
+    <circle cx="450" cy="208" r="4" fill="#38ef7d" opacity="0.6"/><circle cx="470" cy="200" r="4" fill="#ffd200" opacity="0.6"/>
+    <circle cx="490" cy="206" r="4" fill="#6dd5ed" opacity="0.6"/>
+    <line x1="412" y1="205" x2="428" y2="201" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+    <line x1="432" y1="201" x2="448" y2="207" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+    <line x1="452" y1="207" x2="468" y2="201" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+    <line x1="472" y1="201" x2="488" y2="205" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+
+    <!-- Arrow 2→3 -->
+    <polygon points="595,120 625,105 625,135" fill="rgba(255,255,255,0.7)"/>
+    <line x1="580" y1="120" x2="623" y2="120" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+
+    <!-- Step 3: Predicting -->
+    <rect x="640" y="20" width="250" height="200" rx="20" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+    <text x="765" y="62" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Fredoka One, sans-serif" font-size="32" font-weight="bold">3</text>
+    <text x="765" y="105" text-anchor="middle" font-size="36">💬</text>
+    <text x="765" y="145" text-anchor="middle" fill="white" font-family="Fredoka One, sans-serif" font-size="20">Predicting</text>
+    <text x="765" y="172" text-anchor="middle" fill="white" font-family="Nunito, sans-serif" font-size="13" font-weight="600">It predicts the best answer</text>
+    <text x="765" y="192" text-anchor="middle" fill="white" font-family="Nunito, sans-serif" font-size="13" font-weight="600">one word at a time</text>
+    <!-- Word bubbles -->
+    <rect x="700" y="198" width="35" height="16" rx="8" fill="rgba(56,239,125,0.4)"/>
+    <rect x="742" y="198" width="45" height="16" rx="8" fill="rgba(56,239,125,0.4)"/>
+    <rect x="794" y="198" width="30" height="16" rx="8" fill="rgba(56,239,125,0.3)"/>
+
+    <!-- Bottom label -->
+    <text x="450" y="265" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Nunito, sans-serif" font-size="15" font-weight="700">⚠️ An LLM doesn't "think" — it predicts what words should come next based on patterns!</text>
+  </svg>
   <div class="notes">Important distinction: LLMs don't understand the world the way we do. They're pattern-matching machines. This is why they sometimes make mistakes — they predict what sounds right, but it isn't always correct.</div>
 </div>
 
@@ -588,6 +779,31 @@
 <!-- SLIDE 6: Good vs Bad Prompts -->
 <div class="slide theme-orange" id="slide-6">
   <h2>Good Prompts vs. Bad Prompts 🎯</h2>
+  <!-- Visual: vague vs specific orders -->
+  <div style="display: flex; justify-content: center; gap: 50px; margin-bottom: 12px;">
+    <svg viewBox="0 0 140 100" width="120" height="86" xmlns="http://www.w3.org/2000/svg">
+      <!-- Confused chef -->
+      <circle cx="70" cy="35" r="25" fill="#ffe0b2" stroke="#d4a373" stroke-width="2"/>
+      <text x="56" y="32" font-size="12" fill="#333">😕</text>
+      <rect x="45" y="10" width="50" height="12" rx="4" fill="white" stroke="#d4a373" stroke-width="1.5"/>
+      <!-- Speech bubble: "food??" -->
+      <rect x="10" y="60" width="120" height="30" rx="10" fill="rgba(255,82,82,0.25)" stroke="rgba(255,82,82,0.5)" stroke-width="2"/>
+      <text x="70" y="80" text-anchor="middle" font-size="12" fill="white" font-weight="bold">"Give me food"</text>
+    </svg>
+    <svg viewBox="0 0 140 100" width="120" height="86" xmlns="http://www.w3.org/2000/svg">
+      <!-- Happy chef -->
+      <circle cx="70" cy="35" r="25" fill="#ffe0b2" stroke="#d4a373" stroke-width="2"/>
+      <text x="56" y="32" font-size="12" fill="#333">😊</text>
+      <rect x="45" y="10" width="50" height="12" rx="4" fill="white" stroke="#d4a373" stroke-width="1.5"/>
+      <!-- Pizza -->
+      <circle cx="120" cy="30" r="14" fill="#ffd700"/>
+      <circle cx="115" cy="27" r="3" fill="#d32f2f"/>
+      <circle cx="124" cy="33" r="3" fill="#d32f2f"/>
+      <!-- Speech bubble -->
+      <rect x="2" y="60" width="136" height="30" rx="10" fill="rgba(56,239,125,0.25)" stroke="rgba(56,239,125,0.5)" stroke-width="2"/>
+      <text x="70" y="80" text-anchor="middle" font-size="9.5" fill="white" font-weight="bold">"Cheese pizza + mushrooms!"</text>
+    </svg>
+  </div>
   <div class="prompt-compare">
     <div class="prompt-box bad-prompt">
       <h3>❌ Vague Prompt</h3>
@@ -690,9 +906,47 @@
   <div class="notes">Interactive moment: Ask students "What would YOU want to use AI for?" Get a few answers. Kids love the idea of making games with code or writing funny songs.</div>
 </div>
 
-<!-- SLIDE 10: Kid-Safe AI Tools -->
-<div class="slide theme-teal" id="slide-10">
+<!-- SLIDE 10: Build Apps & Games with AI -->
+<div class="slide theme-dark" id="slide-10">
+  <h2>Build Apps & Games with AI! 🎮💻</h2>
+  <div class="figure-row">
+    <div class="figure-side">
+      <img src="https://cdn.undraw.co/illustration/ai-code-generation_imyw.svg" alt="AI Code Generation" style="max-height: 220px;" onerror="this.parentElement.style.display='none';">
+    </div>
+    <div class="content-side">
+      <p style="font-size: 1.15em; margin-bottom: 15px;">AI can be your <strong>coding partner</strong> — helping you create real apps and games, even if you're just starting out!</p>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3>🕹️ Design Your Own Game</h3>
+      <p>Tell AI "Help me make a space invaders game in Scratch" — it walks you through each step, from drawing sprites to adding scoring!</p>
+    </div>
+    <div class="card">
+      <h3>🌐 Build a Website</h3>
+      <p>Ask AI to help you create a website about your favorite hobby — it writes the code and explains how every part works</p>
+    </div>
+    <div class="card">
+      <h3>🐛 Fix Bugs Together</h3>
+      <p>When your code doesn't work, paste it and ask "Why isn't this working?" — AI helps you find and fix the problem</p>
+    </div>
+    <div class="card">
+      <h3>💡 Turn Ideas into Reality</h3>
+      <p>Have an app idea? Describe it to AI and it can help you plan it out, build it piece by piece, and add cool features</p>
+    </div>
+  </div>
+  <div class="analogy-box" style="margin-top: 18px; max-width: 900px;">
+    <p style="font-size: 1.1em;">🚀 <strong>You don't need to be an expert!</strong> AI explains code in plain language and learns alongside you. Start small — a quiz app, a drawing tool, a simple platformer — and keep building!</p>
+  </div>
+  <div class="notes">This is a great hands-on moment! Show a quick example: ask AI to generate a simple game in Scratch or a small HTML page. Let kids see that they can give instructions in plain English and get working code back. Emphasize that AI is a partner — they still need to think, plan, and be creative. The AI just helps with the technical parts.</div>
+</div>
+
+<!-- SLIDE 11: Kid-Safe AI Tools -->
+<div class="slide theme-teal" id="slide-11">
   <h2>AI Tools Made Safe for Kids 🛡️</h2>
+  <div class="slide-figure">
+    <img src="https://cdn.undraw.co/illustrations/education_3vwh.svg" alt="Education illustration" style="max-height: 130px;" onerror="this.parentElement.style.display='none';">
+  </div>
   <div class="tool-list">
     <div class="tool-item">
       <div class="tool-emoji">🌟</div>
@@ -726,8 +980,8 @@
   <div class="notes">Khanmigo is probably the gold standard for education — it acts as a tutor and won't just give answers. Google and Microsoft both have family-safe modes. Scratch is great for younger kids learning coding with AI concepts.</div>
 </div>
 
-<!-- SLIDE 11: More Kid-Safe Tools -->
-<div class="slide theme-indigo" id="slide-11">
+<!-- SLIDE 12: More Kid-Safe Tools -->
+<div class="slide theme-indigo" id="slide-12">
   <h2>More Kid-Friendly AI Tools 🧰</h2>
   <div class="tool-list">
     <div class="tool-item">
@@ -762,10 +1016,11 @@
   <div class="notes">Tip for parents/teachers: Always check the age requirements for each tool. Most require parental consent for users under 13 (COPPA). Google AI Experiments are great for hands-on learning about how AI actually works.</div>
 </div>
 
-<!-- SLIDE 12: The Golden Rules -->
-<div class="slide theme-sunset" id="slide-12">
+<!-- SLIDE 13: The Golden Rules -->
+<div class="slide theme-sunset" id="slide-13">
   <h2>The Golden Rules of Using AI 📜</h2>
-  <ul style="max-width: 800px;">
+  <div class="figure-row">
+    <ul style="max-width: 700px; flex: 1;">
     <li style="padding: 10px 0; padding-left: 45px;">
       <span style="font-size: 1.1em;"><strong>🧑‍🏫 AI is your assistant, not your replacement</strong></span><br>
       <span style="font-size: 0.95em; opacity: 0.9;">Use it to learn and explore — not to skip the learning!</span>
@@ -783,15 +1038,52 @@
       <span style="font-size: 0.95em; opacity: 0.9;">If AI says something weird, scary, or confusing — talk to a parent or teacher.</span>
     </li>
   </ul>
+    <div class="figure-side" style="text-align: center;">
+      <img src="https://cdn.undraw.co/illustrations/security_0ubl.svg" alt="Security illustration" style="max-height: 280px;" onerror="this.parentElement.style.display='none';">
+    </div>
+  </div>
   <div class="notes">These are the most important rules. Spend time on each one. Ask students to repeat them back. The personal information rule is critical — AI chatbots send data to servers, and kids should never share identifying info.</div>
 </div>
 
-<!-- SLIDE 13: What are Hallucinations? -->
-<div class="slide theme-coral" id="slide-13">
+<!-- SLIDE 14: What are Hallucinations? -->
+<div class="slide theme-coral" id="slide-14">
   <h2>AI "Hallucinations" — When AI Makes Stuff Up 🤯</h2>
-  <div class="analogy-box" style="background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.2);">
-    <p>Sometimes AI <strong>confidently says things that are completely wrong</strong>. This is called a <strong>"hallucination."</strong></p>
-    <p style="margin-top: 12px;">It's like when someone tells a story and fills in details they don't actually remember — but says it like they're totally sure! 🤷</p>
+  <div class="figure-row" style="align-items: center; gap: 30px;">
+    <!-- Confused Robot SVG -->
+    <div class="figure-side">
+      <svg viewBox="0 0 200 220" width="160" height="176" xmlns="http://www.w3.org/2000/svg">
+        <!-- Antenna -->
+        <line x1="100" y1="30" x2="100" y2="8" stroke="#2a2a4a" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="100" cy="6" r="6" fill="#ff6e7f"/>
+        <!-- Head -->
+        <rect x="45" y="30" width="110" height="90" rx="20" fill="#c0d0e8" stroke="#2a2a4a" stroke-width="3"/>
+        <!-- Confused eyes: spirals -->
+        <circle cx="75" cy="72" r="16" fill="white" stroke="#2a2a4a" stroke-width="2"/>
+        <path d="M75,64 a4,4 0 0,1 4,4 a6,6 0 0,1 -6,6 a8,8 0 0,1 8,-8" fill="none" stroke="#ff6e7f" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="125" cy="72" r="16" fill="white" stroke="#2a2a4a" stroke-width="2"/>
+        <path d="M125,64 a4,4 0 0,1 4,4 a6,6 0 0,1 -6,6 a8,8 0 0,1 8,-8" fill="none" stroke="#ff6e7f" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Wobbly mouth -->
+        <path d="M72,100 Q85,108 100,98 Q115,108 128,100" fill="none" stroke="#2a2a4a" stroke-width="3" stroke-linecap="round"/>
+        <!-- Body -->
+        <rect x="55" y="125" width="90" height="60" rx="14" fill="#a8b8d0" stroke="#2a2a4a" stroke-width="3"/>
+        <!-- Question marks floating around -->
+        <text x="20" y="50" font-size="28" fill="#ff6e7f" font-weight="bold" opacity="0.8">?</text>
+        <text x="165" y="38" font-size="22" fill="#ff6e7f" font-weight="bold" opacity="0.6">?</text>
+        <text x="170" y="75" font-size="32" fill="#ff6e7f" font-weight="bold" opacity="0.9">?</text>
+        <text x="10" y="95" font-size="20" fill="#ff6e7f" font-weight="bold" opacity="0.5">?</text>
+        <!-- Exclamation -->
+        <text x="155" y="135" font-size="24" fill="#ffd200" font-weight="bold" opacity="0.7">!</text>
+        <!-- Arms -->
+        <line x1="55" y1="145" x2="30" y2="160" stroke="#2a2a4a" stroke-width="3" stroke-linecap="round"/>
+        <line x1="145" y1="145" x2="170" y2="130" stroke="#2a2a4a" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="content-side">
+      <div class="analogy-box" style="background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.2); margin: 0;">
+        <p>Sometimes AI <strong>confidently says things that are completely wrong</strong>. This is called a <strong>"hallucination."</strong></p>
+        <p style="margin-top: 12px;">It's like when someone tells a story and fills in details they don't actually remember — but says it like they're totally sure! 🤷</p>
+      </div>
+    </div>
   </div>
   <div class="cards" style="margin-top: 20px;">
     <div class="card card-dark">
@@ -815,8 +1107,8 @@
   <div class="notes">Fun activity: Ask students "If I asked AI 'What is the tallest building on Mars?' — what do you think it would do?" It would probably make up an answer! That's a hallucination. AI doesn't say "I don't know" as often as it should.</div>
 </div>
 
-<!-- SLIDE 14: How to Avoid Errors -->
-<div class="slide theme-lime" id="slide-14">
+<!-- SLIDE 15: How to Avoid Errors -->
+<div class="slide theme-lime" id="slide-15">
   <h2>How to Get Better Answers from AI 🎯</h2>
   <div class="steps">
     <div class="step" style="background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.15);">
@@ -841,8 +1133,8 @@
   <div class="notes">Practice: Show a bad prompt vs good prompt. Bad: "Help me with homework." Good: "I'm in 6th grade and studying the American Revolution. Can you explain the causes of the Boston Tea Party in simple terms?" The difference in quality is huge.</div>
 </div>
 
-<!-- SLIDE 15: Do's and Don'ts -->
-<div class="slide theme-dark" id="slide-15">
+<!-- SLIDE 16: Do's and Don'ts -->
+<div class="slide theme-dark" id="slide-16">
   <h2>AI Do's and Don'ts ✅ ❌</h2>
   <div class="do-dont">
     <div class="do-col">
@@ -871,9 +1163,20 @@
   <div class="notes">Emphasis: Copying AI's work as your own is like having someone else take your test — you don't learn anything AND it's dishonest. The goal is to use AI as a TOOL for learning, like a calculator or dictionary — not a replacement for your brain!</div>
 </div>
 
-<!-- SLIDE 16: Being a Smart AI User -->
-<div class="slide theme-blue" id="slide-16">
+<!-- SLIDE 17: Being a Smart AI User -->
+<div class="slide theme-blue" id="slide-17">
   <h2>Be a Smart AI Detective! 🕵️</h2>
+  <!-- Detective visual -->
+  <svg viewBox="0 0 400 60" width="360" height="54" style="margin-bottom: 10px;" xmlns="http://www.w3.org/2000/svg">
+    <!-- Magnifying glass path scanning text -->
+    <rect x="10" y="20" width="380" height="20" rx="10" fill="rgba(255,255,255,0.1)"/>
+    <text x="30" y="35" font-size="12" fill="rgba(255,255,255,0.4)" font-family="monospace" font-weight="600">AI says: The tallest mountain is Mt. Everest at 29,032 ft...</text>
+    <!-- Magnifying glass -->
+    <circle cx="310" cy="28" r="18" fill="none" stroke="#ffd700" stroke-width="3" opacity="0.9"/>
+    <line x1="323" y1="41" x2="338" y2="56" stroke="#ffd700" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+    <!-- Checkmark in glass -->
+    <path d="M302,28 L308,34 L320,22" fill="none" stroke="#38ef7d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
   <div class="cards cards-3">
     <div class="card">
       <h3>🔍 Question It</h3>
@@ -894,9 +1197,12 @@
   <div class="notes">Encourage critical thinking. This is maybe the most important slide for building good habits. Ask: "What would you do if AI told you that the capital of Australia is Sydney?" (It's actually Canberra!) This shows why checking matters.</div>
 </div>
 
-<!-- SLIDE 17: The Future -->
-<div class="slide theme-purple" id="slide-17">
+<!-- SLIDE 18: The Future -->
+<div class="slide theme-purple" id="slide-18">
   <h2>AI &amp; Your Future 🚀</h2>
+  <div class="slide-figure">
+    <img src="https://cdn.undraw.co/illustrations/web-developer_ggt0.svg" alt="Future developer" style="max-height: 150px;" onerror="this.parentElement.style.display='none';">
+  </div>
   <div class="cards">
     <div class="card">
       <h3>🏗️ AI Will Be Everywhere</h3>
@@ -914,8 +1220,8 @@
   <div class="notes">Inspiring moment: "You are growing up in the most exciting time in history for technology. Learning how to use AI well RIGHT NOW gives you a superpower that will help you in school, in hobbies, and in your future career."</div>
 </div>
 
-<!-- SLIDE 18: Key Takeaways -->
-<div class="slide theme-end" id="slide-18">
+<!-- SLIDE 19: Key Takeaways -->
+<div class="slide theme-end" id="slide-19">
   <h2>Key Takeaways 🎯</h2>
   <ul style="max-width: 800px;">
     <li style="padding: 8px 0; padding-left: 45px; font-size: 1.2em;">
@@ -950,7 +1256,7 @@
 
 <script>
   let currentSlide = 1;
-  const totalSlides = 18;
+  const totalSlides = 19;
 
   function showSlide(n) {
     document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
