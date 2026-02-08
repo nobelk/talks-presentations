@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI &amp; LLMs for Kids</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #1a1a2e;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    padding: 60px 80px;
+    text-align: center;
+    position: absolute;
+    top: 0; left: 0;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .slide.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.2em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.4em;
+    margin-bottom: 30px;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+
+  p, li {
+    font-size: 1.35em;
+    line-height: 1.6;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
+    text-align: left;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  ul li {
+    padding: 8px 0;
+    padding-left: 40px;
+    position: relative;
+  }
+
+  ul li::before {
+    position: absolute;
+    left: 0;
+    top: 8px;
+  }
+
+  .subtitle {
+    font-size: 1.5em;
+    opacity: 0.9;
+    margin-top: 10px;
+    font-weight: 700;
+  }
+
+  .emoji-big {
+    font-size: 4em;
+    margin-bottom: 20px;
+  }
+
+  .emoji-row {
+    font-size: 3em;
+    margin: 20px 0;
+    letter-spacing: 20px;
+  }
+
+  /* Slide themes */
+  .theme-title {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .theme-blue {
+    background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%);
+  }
+
+  .theme-purple {
+    background: linear-gradient(135deg, #7b4397 0%, #dc2430 50%, #ff6a00 100%);
+  }
+
+  .theme-green {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  }
+
+  .theme-orange {
+    background: linear-gradient(135deg, #f46b45 0%, #eea849 100%);
+  }
+
+  .theme-pink {
+    background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+    color: #333;
+  }
+
+  .theme-dark {
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  }
+
+  .theme-teal {
+    background: linear-gradient(135deg, #004d7a 0%, #008793 33%, #00bf72 100%);
+  }
+
+  .theme-sunset {
+    background: linear-gradient(135deg, #c33764 0%, #1d2671 100%);
+  }
+
+  .theme-lime {
+    background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+    color: #1a3a0a;
+  }
+
+  .theme-coral {
+    background: linear-gradient(135deg, #ff6e7f 0%, #bfe9ff 100%);
+    color: #2a2a4a;
+  }
+
+  .theme-indigo {
+    background: linear-gradient(135deg, #5c258d 0%, #4389a2 100%);
+  }
+
+  .theme-end {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #ffd200 100%);
+    color: #2a1a3a;
+  }
+
+  /* Cards grid */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 950px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: left;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .card-dark {
+    background: rgba(0,0,0,0.2);
+    border: 2px solid rgba(0,0,0,0.15);
+    color: inherit;
+  }
+
+  .card h3 {
+    margin-bottom: 8px;
+  }
+
+  .card p, .card li {
+    font-size: 1.05em;
+    line-height: 1.5;
+  }
+
+  .card ul li {
+    padding: 3px 0;
+    padding-left: 30px;
+  }
+
+  /* Three column cards */
+  .cards-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  /* Single wide card */
+  .card-wide {
+    grid-column: 1 / -1;
+  }
+
+  /* Analogy box */
+  .analogy-box {
+    background: rgba(255,255,255,0.2);
+    border-radius: 24px;
+    padding: 35px 50px;
+    max-width: 850px;
+    margin: 20px 0;
+    border: 3px solid rgba(255,255,255,0.3);
+  }
+
+  .analogy-box p {
+    font-size: 1.3em;
+  }
+
+  /* Do / Don't columns */
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    max-width: 950px;
+    width: 100%;
+  }
+
+  .do-col, .dont-col {
+    border-radius: 20px;
+    padding: 25px 30px;
+    text-align: left;
+  }
+
+  .do-col {
+    background: rgba(56, 239, 125, 0.25);
+    border: 3px solid rgba(56, 239, 125, 0.5);
+  }
+
+  .dont-col {
+    background: rgba(255, 82, 82, 0.25);
+    border: 3px solid rgba(255, 82, 82, 0.5);
+  }
+
+  .do-col h3, .dont-col h3 {
+    font-size: 1.5em;
+    margin-bottom: 12px;
+  }
+
+  .do-col li::before { content: "✅ "; }
+  .dont-col li::before { content: "❌ "; }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    bottom: 25px;
+    right: 30px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+  }
+
+  .nav button {
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .nav button:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.05);
+  }
+
+  /* Slide counter */
+  .slide-counter {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    font-size: 1em;
+    opacity: 0.6;
+    font-weight: 700;
+    z-index: 100;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: rgba(255,255,255,0.7);
+    transition: width 0.4s ease;
+    z-index: 100;
+  }
+
+  /* Highlight text */
+  .highlight {
+    background: rgba(255,255,255,0.25);
+    padding: 2px 12px;
+    border-radius: 8px;
+  }
+
+  /* Speaker notes (hidden, for presenter) */
+  .notes {
+    display: none;
+  }
+
+  /* Tool logo list */
+  .tool-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .tool-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 16px 24px;
+    border: 2px solid rgba(255,255,255,0.2);
+    text-align: left;
+  }
+
+  .tool-item .tool-emoji {
+    font-size: 2.2em;
+    flex-shrink: 0;
+  }
+
+  .tool-item .tool-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 2px;
+  }
+
+  .tool-item .tool-info p {
+    font-size: 1em;
+    opacity: 0.9;
+  }
+
+  /* Steps */
+  .steps {
+    display: flex;
+    gap: 20px;
+    max-width: 950px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .step {
+    flex: 1;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 24px 20px;
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .step-number {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5em;
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  .step h3 {
+    margin-bottom: 6px;
+  }
+
+  .step p {
+    font-size: 1em;
+  }
+
+  /* Responsive */
+  /* Chat demo */
+  .chat-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    max-width: 700px;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .chat-bubble {
+    border-radius: 20px;
+    padding: 18px 24px;
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .user-bubble {
+    background: rgba(255,255,255,0.25);
+    border: 2px solid rgba(255,255,255,0.35);
+    border-bottom-right-radius: 6px;
+    align-self: flex-end;
+  }
+
+  .ai-bubble {
+    background: rgba(0,0,0,0.2);
+    border: 2px solid rgba(255,255,255,0.15);
+    border-bottom-left-radius: 6px;
+    align-self: flex-start;
+  }
+
+  .chat-label {
+    font-weight: 800;
+    font-size: 0.85em;
+    opacity: 0.8;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .chat-bubble p {
+    font-size: 1.05em;
+    line-height: 1.5;
+  }
+
+  .chat-arrow {
+    font-size: 1.5em;
+  }
+
+  /* Prompt comparison */
+  .prompt-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 950px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .prompt-box {
+    border-radius: 20px;
+    padding: 24px;
+    text-align: left;
+  }
+
+  .bad-prompt {
+    background: rgba(255, 82, 82, 0.2);
+    border: 3px solid rgba(255, 82, 82, 0.4);
+  }
+
+  .good-prompt {
+    background: rgba(56, 239, 125, 0.2);
+    border: 3px solid rgba(56, 239, 125, 0.4);
+  }
+
+  .prompt-box h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4em;
+    margin-bottom: 12px;
+  }
+
+  .prompt-text {
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-family: monospace;
+    font-size: 1.05em;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .prompt-result p {
+    font-size: 1em;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .slide { padding: 30px 30px; }
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.8em; }
+    p, li { font-size: 1.1em; }
+    .cards { grid-template-columns: 1fr; }
+    .cards-3 { grid-template-columns: 1fr; }
+    .do-dont { grid-template-columns: 1fr; }
+    .steps { flex-direction: column; }
+    .prompt-compare { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="slide-counter" id="slideCounter"></div>
+
+<!-- SLIDE 1: Title -->
+<div class="slide theme-title active" id="slide-1">
+  <div class="emoji-row">🤖 🧠 ✨</div>
+  <h1>AI &amp; Large Language Models</h1>
+  <p class="subtitle">A Guide for Young Explorers</p>
+  <p style="margin-top: 30px; font-size: 1.1em; opacity: 0.8;">Grades 3 &ndash; 8 &nbsp;|&nbsp; ~20 Minutes</p>
+  <div class="notes">Welcome everyone! Today we're going to learn about one of the most exciting technologies in the world — Artificial Intelligence and Large Language Models.</div>
+</div>
+
+<!-- SLIDE 2: What is AI? -->
+<div class="slide theme-blue" id="slide-2">
+  <div class="emoji-big">🤖</div>
+  <h2>What is Artificial Intelligence?</h2>
+  <div class="analogy-box">
+    <p><strong>AI</strong> is when computers are programmed to do things that normally need human thinking — like recognizing pictures, understanding language, or making decisions.</p>
+  </div>
+  <p style="margin-top: 20px; font-size: 1.2em;">You already use AI every day!</p>
+  <div class="emoji-row" style="font-size: 2em; letter-spacing: 15px; margin-top: 10px;">📱 🎮 🎵 📸 🔍</div>
+  <div class="notes">Ask: "Who has used Siri, Alexa, or Google Assistant?" Those are all AI! AI helps your phone recognize your face, suggests videos on YouTube, and helps filter spam from email.</div>
+</div>
+
+<!-- SLIDE 3: What is an LLM? -->
+<div class="slide theme-purple" id="slide-3">
+  <h2>What is an LLM? 📚</h2>
+  <div class="analogy-box">
+    <p>An <strong>LLM</strong> (Large Language Model) is a special kind of AI that has read <em>billions</em> of books, articles, and websites to learn how language works.</p>
+    <p style="margin-top: 15px;">It's like a super-powered <strong>word predictor</strong> — it figures out the best next word to write, one word at a time!</p>
+  </div>
+  <div style="margin-top: 20px;">
+    <p style="font-size: 1.15em;">Think of it like <strong>autocomplete on your phone</strong>...but WAY more powerful! 💪</p>
+  </div>
+  <div class="notes">Analogy: "Imagine you read every book in every library in the world. Then someone asks you a question, and you put together an answer word-by-word, picking the best next word each time. That's basically what an LLM does — but with math instead of a brain!"</div>
+</div>
+
+<!-- SLIDE 4: How Does It Work? -->
+<div class="slide theme-dark" id="slide-4">
+  <h2>How Does an LLM Work? ⚙️</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>📖 Training</h3>
+      <p>The AI reads billions of pages of text from books, websites, and articles</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>🧩 Patterns</h3>
+      <p>It learns patterns — how words, sentences, and ideas connect to each other</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>💬 Predicting</h3>
+      <p>When you ask a question, it predicts the best answer one word at a time</p>
+    </div>
+  </div>
+  <div class="analogy-box" style="margin-top: 25px; max-width: 800px;">
+    <p style="font-size: 1.15em;">⚠️ <strong>Key idea:</strong> An LLM doesn't <em>think</em> or <em>know</em> things like a human. It's really good at <strong>predicting</strong> what words should come next based on patterns!</p>
+  </div>
+  <div class="notes">Important distinction: LLMs don't understand the world the way we do. They're pattern-matching machines. This is why they sometimes make mistakes — they predict what sounds right, but it isn't always correct.</div>
+</div>
+
+<!-- SLIDE 5: What is a Prompt? -->
+<div class="slide theme-green" id="slide-5">
+  <h2>What is a Prompt? 💬</h2>
+  <div class="analogy-box">
+    <p>A <strong>prompt</strong> is the message you type to talk to AI. It's like giving instructions to a super-smart robot helper!</p>
+  </div>
+  <div class="chat-demo">
+    <div class="chat-bubble user-bubble">
+      <span class="chat-label">You 🧑</span>
+      <p>Write a short poem about a dog who loves pizza</p>
+    </div>
+    <div class="chat-arrow">⬇️</div>
+    <div class="chat-bubble ai-bubble">
+      <span class="chat-label">AI 🤖</span>
+      <p>There once was a pup named Lou,<br>Who loved pizza through and through,<br>Pepperoni on top,<br>He just couldn't stop,<br>And ate every last slice — wouldn't you? 🍕</p>
+    </div>
+  </div>
+  <p style="margin-top: 15px; font-size: 1.15em;">The better your prompt, the better the AI's answer!</p>
+  <div class="notes">Explain that a prompt is just a fancy word for the message or question you type. Show how the AI reads your prompt and generates a response. The quality of what you get back depends on how well you write your prompt!</div>
+</div>
+
+<!-- SLIDE 6: Good vs Bad Prompts -->
+<div class="slide theme-orange" id="slide-6">
+  <h2>Good Prompts vs. Bad Prompts 🎯</h2>
+  <div class="prompt-compare">
+    <div class="prompt-box bad-prompt">
+      <h3>❌ Vague Prompt</h3>
+      <div class="prompt-text">"Tell me about space"</div>
+      <div class="prompt-result">
+        <p>AI doesn't know what about space you want! You might get a long, random answer about anything from stars to astronauts to black holes...</p>
+      </div>
+    </div>
+    <div class="prompt-box good-prompt">
+      <h3>✅ Specific Prompt</h3>
+      <div class="prompt-text">"I'm in 5th grade. Explain why the Moon has phases using simple words and an example I can picture."</div>
+      <div class="prompt-result">
+        <p>AI knows your level, your topic, and exactly what you need — so you get a clear, helpful answer!</p>
+      </div>
+    </div>
+  </div>
+  <div class="analogy-box" style="margin-top: 20px; max-width: 800px;">
+    <p style="font-size: 1.15em;">🍕 Think of it like ordering food: <strong>"Give me food"</strong> vs. <strong>"I'd like a medium cheese pizza with mushrooms, please!"</strong> — which order gets you what you want?</p>
+  </div>
+  <div class="notes">This is a great interactive moment. Ask kids: "Which prompt do you think will get a better answer?" Then show why. The pizza analogy really clicks with kids. You can also ask them to turn a bad prompt into a good one.</div>
+</div>
+
+<!-- SLIDE 7: Prompt Building Blocks -->
+<div class="slide theme-indigo" id="slide-7">
+  <h2>Build the Perfect Prompt! 🧱</h2>
+  <p style="font-size: 1.2em; margin-bottom: 15px;">Use these <strong>4 building blocks</strong> to craft awesome prompts:</p>
+  <div class="cards">
+    <div class="card" style="text-align: center;">
+      <div style="font-size: 2.5em;">🎭</div>
+      <h3>Role</h3>
+      <p>Tell AI <em>who</em> to be<br><span style="opacity:0.85; font-size:0.9em;">"Act like a friendly science teacher"</span></p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div style="font-size: 2.5em;">📋</div>
+      <h3>Task</h3>
+      <p>Say <em>what</em> you need<br><span style="opacity:0.85; font-size:0.9em;">"Explain how volcanoes erupt"</span></p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div style="font-size: 2.5em;">🎒</div>
+      <h3>Context</h3>
+      <p>Give <em>background</em> info<br><span style="opacity:0.85; font-size:0.9em;">"I'm in 4th grade studying Earth science"</span></p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div style="font-size: 2.5em;">📐</div>
+      <h3>Format</h3>
+      <p>Describe the <em>output</em><br><span style="opacity:0.85; font-size:0.9em;">"Use bullet points and simple words"</span></p>
+    </div>
+  </div>
+  <div class="analogy-box" style="margin-top: 18px; max-width: 900px;">
+    <p style="font-size: 1.05em;">🏆 <strong>Put it together:</strong> "Act like a friendly science teacher. Explain how volcanoes erupt to a 4th grader studying Earth science. Use bullet points and simple words."</p>
+  </div>
+  <div class="notes">Walk through each building block. Then show how combining them all creates a super-powered prompt. Have kids try building their own prompt using the 4 blocks. This is a hands-on activity — give them a topic and have them fill in each block!</div>
+</div>
+
+<!-- SLIDE 8: Cool Ways Kids Can Use AI -->
+<div class="slide theme-green" id="slide-8">
+  <h2>Cool Ways Kids Can Use AI! 🎉</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>📝 Homework Helper</h3>
+      <p>Ask AI to <em>explain</em> a tough concept in simple words, like "Explain photosynthesis like I'm 10"</p>
+    </div>
+    <div class="card">
+      <h3>📖 Story Creator</h3>
+      <p>Write stories together with AI! Give it a character and setting, and build an adventure</p>
+    </div>
+    <div class="card">
+      <h3>🌍 Language Practice</h3>
+      <p>Practice a new language by having conversations with AI in Spanish, French, and more</p>
+    </div>
+    <div class="card">
+      <h3>🔬 Science Explorer</h3>
+      <p>Ask "What if?" questions like "What would happen if Earth had two moons?"</p>
+    </div>
+  </div>
+  <div class="notes">Encourage kids to try these! The homework helper one is great — emphasize asking AI to EXPLAIN, not just give the answer. Story creation is super engaging for younger kids.</div>
+</div>
+
+<!-- SLIDE 9: More Fun Uses -->
+<div class="slide theme-orange" id="slide-9">
+  <h2>Even More Fun Uses! 🚀</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>🎨 Art Ideas</h3>
+      <p>Ask for drawing prompts, color palette ideas, or help describing what you want to create</p>
+    </div>
+    <div class="card">
+      <h3>💻 Learn to Code</h3>
+      <p>Ask AI to teach you programming step by step — build games, websites, or apps!</p>
+    </div>
+    <div class="card">
+      <h3>🧠 Quiz Maker</h3>
+      <p>Have AI create practice quizzes for any subject to help you study for tests</p>
+    </div>
+    <div class="card">
+      <h3>🎵 Song &amp; Poem Writer</h3>
+      <p>Create poems, raps, or silly songs about any topic — even math!</p>
+    </div>
+  </div>
+  <div class="notes">Interactive moment: Ask students "What would YOU want to use AI for?" Get a few answers. Kids love the idea of making games with code or writing funny songs.</div>
+</div>
+
+<!-- SLIDE 10: Kid-Safe AI Tools -->
+<div class="slide theme-teal" id="slide-10">
+  <h2>AI Tools Made Safe for Kids 🛡️</h2>
+  <div class="tool-list">
+    <div class="tool-item">
+      <div class="tool-emoji">🌟</div>
+      <div class="tool-info">
+        <h3>Google Gemini (with Family Link)</h3>
+        <p>Google's AI assistant with parental controls &amp; content filters for under-18 users</p>
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-emoji">🔷</div>
+      <div class="tool-info">
+        <h3>Microsoft Copilot (with Family Safety)</h3>
+        <p>Built into Bing &amp; Edge with strict Safe Search and kid-friendly content filtering</p>
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-emoji">🐱</div>
+      <div class="tool-info">
+        <h3>Khanmigo (Khan Academy)</h3>
+        <p>A tutoring AI designed specifically for students — helps with math, writing, and more</p>
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-emoji">🤖</div>
+      <div class="tool-info">
+        <h3>Scratch + AI Extensions</h3>
+        <p>MIT's free coding platform with kid-safe AI & machine learning tools built in</p>
+      </div>
+    </div>
+  </div>
+  <div class="notes">Khanmigo is probably the gold standard for education — it acts as a tutor and won't just give answers. Google and Microsoft both have family-safe modes. Scratch is great for younger kids learning coding with AI concepts.</div>
+</div>
+
+<!-- SLIDE 11: More Kid-Safe Tools -->
+<div class="slide theme-indigo" id="slide-11">
+  <h2>More Kid-Friendly AI Tools 🧰</h2>
+  <div class="tool-list">
+    <div class="tool-item">
+      <div class="tool-emoji">🎨</div>
+      <div class="tool-info">
+        <h3>Canva (Education / Free for Students)</h3>
+        <p>Create presentations, posters, and art with AI-powered design tools and safe image generation</p>
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-emoji">📚</div>
+      <div class="tool-info">
+        <h3>Book Creator + AI</h3>
+        <p>Write and illustrate your own books using kid-safe AI writing and image assistants</p>
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-emoji">🗣️</div>
+      <div class="tool-info">
+        <h3>Duolingo (AI-Powered)</h3>
+        <p>Learn languages by chatting with AI characters in safe, guided conversations</p>
+      </div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-emoji">🎮</div>
+      <div class="tool-info">
+        <h3>AI Experiments (Google)</h3>
+        <p>Free, fun experiments like Quick Draw, Teachable Machine, and more to explore how AI works</p>
+      </div>
+    </div>
+  </div>
+  <div class="notes">Tip for parents/teachers: Always check the age requirements for each tool. Most require parental consent for users under 13 (COPPA). Google AI Experiments are great for hands-on learning about how AI actually works.</div>
+</div>
+
+<!-- SLIDE 12: The Golden Rules -->
+<div class="slide theme-sunset" id="slide-12">
+  <h2>The Golden Rules of Using AI 📜</h2>
+  <ul style="max-width: 800px;">
+    <li style="padding: 10px 0; padding-left: 45px;">
+      <span style="font-size: 1.1em;"><strong>🧑‍🏫 AI is your assistant, not your replacement</strong></span><br>
+      <span style="font-size: 0.95em; opacity: 0.9;">Use it to learn and explore — not to skip the learning!</span>
+    </li>
+    <li style="padding: 10px 0; padding-left: 45px;">
+      <span style="font-size: 1.1em;"><strong>🔍 Always double-check AI's answers</strong></span><br>
+      <span style="font-size: 0.95em; opacity: 0.9;">AI can be wrong! Verify important facts with trusted sources.</span>
+    </li>
+    <li style="padding: 10px 0; padding-left: 45px;">
+      <span style="font-size: 1.1em;"><strong>🔒 Never share personal information</strong></span><br>
+      <span style="font-size: 0.95em; opacity: 0.9;">Don't tell AI your full name, address, school, phone number, or passwords.</span>
+    </li>
+    <li style="padding: 10px 0; padding-left: 45px;">
+      <span style="font-size: 1.1em;"><strong>🗣️ Tell a trusted adult</strong></span><br>
+      <span style="font-size: 0.95em; opacity: 0.9;">If AI says something weird, scary, or confusing — talk to a parent or teacher.</span>
+    </li>
+  </ul>
+  <div class="notes">These are the most important rules. Spend time on each one. Ask students to repeat them back. The personal information rule is critical — AI chatbots send data to servers, and kids should never share identifying info.</div>
+</div>
+
+<!-- SLIDE 13: What are Hallucinations? -->
+<div class="slide theme-coral" id="slide-13">
+  <h2>AI "Hallucinations" — When AI Makes Stuff Up 🤯</h2>
+  <div class="analogy-box" style="background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.2);">
+    <p>Sometimes AI <strong>confidently says things that are completely wrong</strong>. This is called a <strong>"hallucination."</strong></p>
+    <p style="margin-top: 12px;">It's like when someone tells a story and fills in details they don't actually remember — but says it like they're totally sure! 🤷</p>
+  </div>
+  <div class="cards" style="margin-top: 20px;">
+    <div class="card card-dark">
+      <h3>📌 Examples</h3>
+      <ul>
+        <li style="padding-left: 30px;">Inventing fake book titles or authors</li>
+        <li style="padding-left: 30px;">Getting historical dates wrong</li>
+        <li style="padding-left: 30px;">Making up scientific "facts"</li>
+        <li style="padding-left: 30px;">Creating fake website links</li>
+      </ul>
+    </div>
+    <div class="card card-dark">
+      <h3>🤔 Why Does This Happen?</h3>
+      <ul>
+        <li style="padding-left: 30px;">AI predicts words, not truth</li>
+        <li style="padding-left: 30px;">It can't tell fact from fiction</li>
+        <li style="padding-left: 30px;">It tries to always give an answer, even when it shouldn't</li>
+      </ul>
+    </div>
+  </div>
+  <div class="notes">Fun activity: Ask students "If I asked AI 'What is the tallest building on Mars?' — what do you think it would do?" It would probably make up an answer! That's a hallucination. AI doesn't say "I don't know" as often as it should.</div>
+</div>
+
+<!-- SLIDE 14: How to Avoid Errors -->
+<div class="slide theme-lime" id="slide-14">
+  <h2>How to Get Better Answers from AI 🎯</h2>
+  <div class="steps">
+    <div class="step" style="background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.15);">
+      <div class="step-number">1</div>
+      <h3>Be Specific</h3>
+      <p>Instead of "Tell me about animals" try "What do dolphins eat and how do they hunt?"</p>
+    </div>
+    <div class="step" style="background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.15);">
+      <div class="step-number">2</div>
+      <h3>Ask for Sources</h3>
+      <p>Say "Can you tell me where this information comes from?" so you can check it</p>
+    </div>
+    <div class="step" style="background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.15);">
+      <div class="step-number">3</div>
+      <h3>Verify Facts</h3>
+      <p>Look up important information in books, encyclopedias, or trusted websites too</p>
+    </div>
+  </div>
+  <div class="analogy-box" style="margin-top: 20px; background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.15); max-width: 850px;">
+    <p style="font-size: 1.15em; color: #1a3a0a;"><strong>Pro Tip:</strong> Give AI <em>context</em>! Tell it your grade level, what subject you're studying, and exactly what you need help with. The more details you give, the better the answer!</p>
+  </div>
+  <div class="notes">Practice: Show a bad prompt vs good prompt. Bad: "Help me with homework." Good: "I'm in 6th grade and studying the American Revolution. Can you explain the causes of the Boston Tea Party in simple terms?" The difference in quality is huge.</div>
+</div>
+
+<!-- SLIDE 15: Do's and Don'ts -->
+<div class="slide theme-dark" id="slide-15">
+  <h2>AI Do's and Don'ts ✅ ❌</h2>
+  <div class="do-dont">
+    <div class="do-col">
+      <h3>✅ DO</h3>
+      <ul>
+        <li>Use AI to <em>understand</em> concepts</li>
+        <li>Ask it to explain things differently</li>
+        <li>Use it for brainstorming ideas</li>
+        <li>Check AI's answers with other sources</li>
+        <li>Tell adults if something seems wrong</li>
+        <li>Have fun exploring and learning!</li>
+      </ul>
+    </div>
+    <div class="dont-col">
+      <h3>❌ DON'T</h3>
+      <ul>
+        <li>Copy AI answers as your own work</li>
+        <li>Share personal or private info</li>
+        <li>Believe everything AI says</li>
+        <li>Use AI for tests or exams (unless allowed)</li>
+        <li>Ask AI to do mean or harmful things</li>
+        <li>Use AI without permission from adults</li>
+      </ul>
+    </div>
+  </div>
+  <div class="notes">Emphasis: Copying AI's work as your own is like having someone else take your test — you don't learn anything AND it's dishonest. The goal is to use AI as a TOOL for learning, like a calculator or dictionary — not a replacement for your brain!</div>
+</div>
+
+<!-- SLIDE 16: Being a Smart AI User -->
+<div class="slide theme-blue" id="slide-16">
+  <h2>Be a Smart AI Detective! 🕵️</h2>
+  <div class="cards cards-3">
+    <div class="card">
+      <h3>🔍 Question It</h3>
+      <p>Always ask yourself: "Does this answer make sense?" If something feels off, investigate!</p>
+    </div>
+    <div class="card">
+      <h3>🧪 Test It</h3>
+      <p>Ask the same question in different ways. If AI gives different answers, one might be wrong!</p>
+    </div>
+    <div class="card">
+      <h3>📖 Compare It</h3>
+      <p>Check AI's answers against books, teachers, or trusted websites like encyclopedia.com</p>
+    </div>
+  </div>
+  <div class="analogy-box" style="margin-top: 25px; max-width: 800px;">
+    <p style="font-size: 1.2em;">🧠 <strong>Remember:</strong> The smartest people in the world don't just accept answers — they ask questions, check facts, and think critically. You can do that too!</p>
+  </div>
+  <div class="notes">Encourage critical thinking. This is maybe the most important slide for building good habits. Ask: "What would you do if AI told you that the capital of Australia is Sydney?" (It's actually Canberra!) This shows why checking matters.</div>
+</div>
+
+<!-- SLIDE 17: The Future -->
+<div class="slide theme-purple" id="slide-17">
+  <h2>AI &amp; Your Future 🚀</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>🏗️ AI Will Be Everywhere</h3>
+      <p>Almost every job in the future will use AI tools — doctors, artists, engineers, teachers, and more</p>
+    </div>
+    <div class="card">
+      <h3>🧑‍💻 You Can Shape AI</h3>
+      <p>The kids learning about AI today will be the ones who build and improve it tomorrow!</p>
+    </div>
+    <div class="card card-wide">
+      <h3>🌟 Skills That Matter Most</h3>
+      <p style="font-size: 1.15em;"><strong>Creativity</strong> — AI can help, but YOUR ideas are unique &nbsp;|&nbsp; <strong>Critical Thinking</strong> — knowing when to trust AI and when to question it &nbsp;|&nbsp; <strong>Curiosity</strong> — keep asking questions and exploring!</p>
+    </div>
+  </div>
+  <div class="notes">Inspiring moment: "You are growing up in the most exciting time in history for technology. Learning how to use AI well RIGHT NOW gives you a superpower that will help you in school, in hobbies, and in your future career."</div>
+</div>
+
+<!-- SLIDE 18: Key Takeaways -->
+<div class="slide theme-end" id="slide-18">
+  <h2>Key Takeaways 🎯</h2>
+  <ul style="max-width: 800px;">
+    <li style="padding: 8px 0; padding-left: 45px; font-size: 1.2em;">
+      <strong>🤖 AI is a powerful tool</strong> — not magic, not perfect
+    </li>
+    <li style="padding: 8px 0; padding-left: 45px; font-size: 1.2em;">
+      <strong>📚 LLMs predict words</strong> — they don't truly "know" things
+    </li>
+    <li style="padding: 8px 0; padding-left: 45px; font-size: 1.2em;">
+      <strong>🛡️ Use kid-safe tools</strong> — with parent/teacher guidance
+    </li>
+    <li style="padding: 8px 0; padding-left: 45px; font-size: 1.2em;">
+      <strong>🔍 Always verify</strong> — be a fact-checking detective!
+    </li>
+    <li style="padding: 8px 0; padding-left: 45px; font-size: 1.2em;">
+      <strong>🔒 Protect your privacy</strong> — never share personal info
+    </li>
+    <li style="padding: 8px 0; padding-left: 45px; font-size: 1.2em;">
+      <strong>🧠 Keep learning!</strong> — AI helps you grow, not replace you
+    </li>
+  </ul>
+  <div class="emoji-row" style="margin-top: 20px; font-size: 2.5em;">🎉 🙋 ❓</div>
+  <p class="subtitle" style="margin-top: 10px;">Questions? Let's discuss!</p>
+  <div class="notes">Wrap up by asking: "What's one thing you learned today?" and "What's one thing you want to try with AI?" Leave time for questions. Remind them of the golden rules one more time.</div>
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button onclick="prevSlide()" id="prevBtn">← Back</button>
+  <button onclick="nextSlide()" id="nextBtn">Next →</button>
+</div>
+
+<script>
+  let currentSlide = 1;
+  const totalSlides = 18;
+
+  function showSlide(n) {
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('slide-' + n);
+    if (target) {
+      target.classList.add('active');
+      currentSlide = n;
+      updateUI();
+    }
+  }
+
+  function nextSlide() {
+    if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    if (currentSlide > 1) showSlide(currentSlide - 1);
+  }
+
+  function updateUI() {
+    document.getElementById('slideCounter').textContent = currentSlide + ' / ' + totalSlides;
+    document.getElementById('progressBar').style.width = ((currentSlide / totalSlides) * 100) + '%';
+    document.getElementById('prevBtn').style.opacity = currentSlide === 1 ? '0.3' : '1';
+    document.getElementById('nextBtn').style.opacity = currentSlide === totalSlides ? '0.3' : '1';
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      nextSlide();
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+      e.preventDefault();
+      prevSlide();
+    }
+    if (e.key === 'Home') { e.preventDefault(); showSlide(1); }
+    if (e.key === 'End') { e.preventDefault(); showSlide(totalSlides); }
+  });
+
+  // Touch swipe support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+  });
+
+  // Initialize
+  updateUI();
+</script>
+
+</body>
+</html>
